@@ -68,16 +68,22 @@ func (r *Radarr) HandleEvent(event string) {
 		}
 	case "Download":
 		downloadedMovieId := os.Getenv("radarr_movie_id")
-		// Log the event
+		downloadId := os.Getenv("radarr_download_id")
+
 		log.WithFields(log.Fields{
-			"radarr_movie_id": downloadedMovieId,
+			"radarr_movie_id":    downloadedMovieId,
+			"radarr_download_id": downloadId,
 		}).Debug("Handling Download event")
 		movieId, err := strconv.Atoi(downloadedMovieId)
 		if err != nil {
 			log.WithError(err).Error("Failed to convert radarr_movie_id to int")
 			return
 		}
-		r.removeOutdatedTorrents(movieId)
+		var torrentHash string
+		if isValidTorrentHash(downloadId) {
+			torrentHash = downloadId
+		}
+		r.removeOutdatedTorrents(movieId, torrentHash)
 	case "MovieDelete":
 		removedMovieId := os.Getenv("radarr_movie_id")
 		movieId, err := strconv.Atoi(removedMovieId)
@@ -192,13 +198,15 @@ func (r *Radarr) buildIndex() {
 	}).Info("Radarr index built")
 }
 
-func (r *Radarr) removeOutdatedTorrents(movieId int) {
+func (r *Radarr) removeOutdatedTorrents(movieId int, torrentHash string) {
 	movieHistory := r.getMovieHistory(movieId)
+
+	log.WithField("Movie History", movieHistory).Trace()
 
 	// Filter in elements where event type is downloadFolderImported and valid torrent hash
 	downloadFolderImportedHistory := make([]RadarrMoviesHistoryResponse, 0)
 	for _, history := range movieHistory {
-		if history.EventType == "downloadFolderImported" && isValidTorrentHash(history.DownloadId) {
+		if history.EventType == "downloadFolderImported" && isValidTorrentHash(history.DownloadId) && torrentHash != history.DownloadId {
 			downloadFolderImportedHistory = append(downloadFolderImportedHistory, history)
 		}
 	}
@@ -212,15 +220,13 @@ func (r *Radarr) removeOutdatedTorrents(movieId int) {
 		"Download Folder Imported History": downloadFolderImportedHistory,
 	}).Trace()
 
-	if len(downloadFolderImportedHistory) < 2 {
-		log.Debug("Nothing to remove, ignore")
-		return
+	var outdatedHashValues []string
+	for _, history := range downloadFolderImportedHistory {
+		if history.DownloadId != torrentHash {
+			outdatedHashValues = append(outdatedHashValues, history.DownloadId)
+		}
 	}
 
-	outdatedHashValues := make([]string, len(downloadFolderImportedHistory)-1)
-	for i := 1; i < len(downloadFolderImportedHistory); i++ {
-		outdatedHashValues[i-1] = downloadFolderImportedHistory[i].DownloadId
-	}
 	log.WithFields(log.Fields{
 		"Outdated Hash Values": outdatedHashValues,
 	}).Debug()

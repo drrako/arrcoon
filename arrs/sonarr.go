@@ -45,7 +45,9 @@ func (s *Sonarr) HandleEvent(event string) {
 	switch event {
 	case "Test":
 		log.Debug("Handling Test event")
-		s.testApi()
+		if !s.testApi() {
+			os.Exit(1)
+		}
 		s.index.dropIndex()
 		s.buildIndex()
 	case "Grab":
@@ -93,17 +95,18 @@ func (s *Sonarr) HandleEvent(event string) {
 	}
 }
 
-func (s *Sonarr) testApi() {
+func (s *Sonarr) testApi() bool {
 	log.Info("Testing Sonarr accessibility")
 	var apiResponse SonarrApiResponse
 	_, err := s.restClient.R().SetResult(&apiResponse).Get("api")
 	if err != nil {
 		log.WithError(err).Error("Couldn't connect to Sonarr API")
-		os.Exit(1)
+		return false
 	}
 	log.WithFields(log.Fields{
 		"Current API Version": apiResponse.Current,
 	}).Info("Succesfully connected to Sonarr")
+	return true
 }
 
 func (s *Sonarr) getSeriesIds() []int {
