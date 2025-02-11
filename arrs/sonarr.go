@@ -37,7 +37,7 @@ func NewSonarr(appDir string, host string, token string, torrentClient clients.T
 	return &Sonarr{
 		appDir:        appDir,
 		torrentClient: torrentClient,
-		restClient:    resty.New().SetBaseURL(host).SetHeader("X-Api-Key", token),
+		restClient:    resty.New().SetBaseURL(host).SetHeader(AUTH_HEADER, token),
 		index:         *NewIndex("sonarr", appDir),
 	}
 }
@@ -51,15 +51,15 @@ func (s *Sonarr) HandleEvent(event string) {
 		s.index.dropIndex()
 		s.buildIndex()
 	case "Grab":
-		grabbedSeriesId := os.Getenv("sonarr_series_id")
+		seriesIdString := os.Getenv("sonarr_series_id")
 		downloadId := os.Getenv("sonarr_download_id")
 		seriesTitle := os.Getenv("sonarr_series_title")
 		log.WithFields(log.Fields{
-			"sonarr_series_id":    grabbedSeriesId,
+			"sonarr_series_id":    seriesIdString,
 			"sonarr_download_id":  downloadId,
 			"sonarr_series_title": seriesTitle,
 		}).Debug("Handling Grab event")
-		seriesId, err := strconv.Atoi(grabbedSeriesId)
+		seriesId, err := strconv.Atoi(seriesIdString)
 		if err != nil {
 			log.WithError(err).Error("Failed to convert grabbedSeriesId to int")
 			return
@@ -68,17 +68,36 @@ func (s *Sonarr) HandleEvent(event string) {
 			s.updateIndexFile(seriesId, downloadId)
 		}
 	case "Download":
-		downloadedSeriesId := os.Getenv("sonarr_series_id")
+		seriesIdString := os.Getenv("sonarr_series_id")
 		// Log the event
 		log.WithFields(log.Fields{
-			"sonarr_series_id": downloadedSeriesId,
+			"sonarr_series_id": seriesIdString,
 		}).Debug("Handling Download event")
-		seriesId, err := strconv.Atoi(downloadedSeriesId)
+		seriesId, err := strconv.Atoi(seriesIdString)
 		if err != nil {
 			log.WithError(err).Error("Failed to convert sonarr_series_id to int")
 			return
 		}
-		s.removeOutdatedTorrents(seriesId)
+		s.removeOutdatedTorrents(seriesId, nil)
+	case "EpisodeFileDelete":
+		seriesIdString := os.Getenv("sonarr_series_id")
+		deletedEpisodeIdString := os.Getenv("sonarr_episodefile_id")
+		// Log the event
+		log.WithFields(log.Fields{
+			"sonarr_series_id":      seriesIdString,
+			"sonarr_episodefile_id": deletedEpisodeIdString,
+		}).Debug("Handling EpisodeFileDelete event")
+		seriesId, err := strconv.Atoi(seriesIdString)
+		if err != nil {
+			log.WithError(err).Error("Failed to convert sonarr_series_id to int")
+			return
+		}
+		deletedEpisodeId, err := strconv.Atoi(deletedEpisodeIdString)
+		if err != nil {
+			log.WithError(err).Error("Failed to convert sonarr_episodefile_id to int")
+			return
+		}
+		s.removeOutdatedTorrents(seriesId, &deletedEpisodeId)
 	case "SeriesDelete":
 		removedSeriesId := os.Getenv("sonarr_series_id")
 		seriesId, err := strconv.Atoi(removedSeriesId)
@@ -129,21 +148,32 @@ func (s *Sonarr) getSeriesIds() []int {
 	return seriesIds
 }
 
-func (s *Sonarr) removeOutdatedTorrents(seriesId int) {
+// Removes all torrents files which are not mapped to active episodes
+func (s *Sonarr) removeOutdatedTorrents(seriesId int, removedEpisodeId *int) {
 	seriesHistory := s.getSeriesHistory(seriesId)
 
-	// Filter in elements where event type is downloadFolderImported and valid torrent hash
-	downloadFolderImportedHistory := make([]SonarrSeriesEpisodeHistoryResponse, 0)
+	// Collect all file imported history entries where torrent hash download id or where the event type is episodeFileDeleted
+	relevantSeriesHistory := make([]SonarrSeriesEpisodeHistoryResponse, 0)
 	for _, history := range seriesHistory {
-		if history.EventType == "downloadFolderImported" && isValidTorrentHash(history.DownloadId) {
-			downloadFolderImportedHistory = append(downloadFolderImportedHistory, history)
+		if (isValidTorrentHash(history.DownloadId) && (history.EventType == "downloadFolderImported")) || history.EventType == "episodeFileDeleted" {
+			relevantSeriesHistory = append(relevantSeriesHistory, history)
 		}
+	}
+
+	if removedEpisodeId != nil {
+		// Append history entry to downloadFolderImportedHistory with the current removed episode id
+		relevantSeriesHistory = append(relevantSeriesHistory, SonarrSeriesEpisodeHistoryResponse{
+			EpisodeId:  *removedEpisodeId,
+			DownloadId: "",
+			Date:       time.Now(),
+			EventType:  "episodeFileDeleted",
+		})
 	}
 
 	// History entries to episode id
 	historyMap := make(map[int][]SonarrSeriesEpisodeHistoryResponse)
 
-	for _, history := range downloadFolderImportedHistory {
+	for _, history := range relevantSeriesHistory {
 		if _, ok := historyMap[history.EpisodeId]; !ok {
 			historyMap[history.EpisodeId] = []SonarrSeriesEpisodeHistoryResponse{history}
 		} else {
@@ -166,10 +196,16 @@ func (s *Sonarr) removeOutdatedTorrents(seriesId int) {
 	var uniqueRelevantValuesMap = make(map[string]bool)
 	var uniqueOutdatedValuesMap = make(map[string]bool)
 
-	// Get the first history entry for each episode ID
+	// Get the first history entry for each episode ID.
+	// If the first one is episodeFileDeleted - the connected download id is not relevant any longer.
 	for _, histories := range historyMap {
 		if len(histories) > 0 {
-			uniqueRelevantValuesMap[histories[0].DownloadId] = true
+			switch histories[0].EventType {
+			case "episodeFileDeleted":
+				uniqueRelevantValuesMap[histories[0].DownloadId] = false
+			default:
+				uniqueRelevantValuesMap[histories[0].DownloadId] = true
+			}
 		}
 		if len(histories) > 1 {
 			for _, history := range histories[1:] {

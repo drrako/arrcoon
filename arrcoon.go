@@ -21,7 +21,7 @@ type Config struct {
 		Host  string `yaml:"host"`
 		Token string `yaml:"token"`
 	} `yaml:"radarr"`
-	Clients clients.Clients `yaml:"clients"`
+	Clients map[string]clients.ClientConfig `yaml:"clients"`
 	Log     struct {
 		Level string `yaml:"level"`
 	} `yaml:"log"`
@@ -56,27 +56,45 @@ func main() {
 	}
 	log.SetLevel(level)
 
+	if len(config.Clients) == 0 {
+		log.Error("No torrent clients defined")
+		os.Exit(1)
+	}
+	if len(config.Clients) > 1 {
+		log.WithFields(log.Fields{
+			"Clients": config.Clients,
+		}).Error("Multiple torrent clients not supported")
+		os.Exit(1)
+	}
+
+	var clientType string
+	var clientConfig clients.ClientConfig
+	for k, v := range config.Clients {
+		clientType = k
+		clientConfig = v
+		break
+	}
+
 	// Get Torrent Client Instance
-	constructor, clientExists := clients.Instances[config.Clients.Type]
+	constructor, clientExists := clients.Instances[clientType]
 
 	if !clientExists {
 		log.WithFields(log.Fields{
-			"Type": config.Clients.Type,
+			"Type": clientType,
 		}).Error("Couldn't map torrent client")
 	}
 
-	torrentClient := constructor(config.Clients)
+	torrentClient := constructor(clientConfig)
 
 	// Get Sonarr event type
 	sonarrEventType := os.Getenv("sonarr_eventtype")
 	radarrEventType := os.Getenv("radarr_eventtype")
 
 	if sonarrEventType == "Test" || radarrEventType == "Test" {
-		// Print the parsed configuration
 		log.WithFields(log.Fields{
 			"Sonarr URL":     config.Sonarr.Host,
-			"Torrent Client": config.Clients.Type,
-			"Rtorrent URL":   config.Clients.Rtorrent.Host,
+			"Radarr URL":     config.Radarr.Host,
+			"Torrent Client": clientType,
 		}).Info()
 		if !torrentClient.Test() {
 			os.Exit(1)

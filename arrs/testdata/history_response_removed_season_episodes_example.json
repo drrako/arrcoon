@@ -1,0 +1,545 @@
+[
+  {
+    "episodeId": 3751,
+    "seriesId": 85,
+    "date": "2025-02-10T22:36:05Z",
+    "eventType": "episodeFileDeleted",
+    "id": 1762
+  },
+  {
+    "episodeId": 3750,
+    "seriesId": 85,
+    "date": "2025-02-10T22:36:05Z",
+    "eventType": "episodeFileDeleted",
+    "id": 1761
+  },
+  {
+    "episodeId": 3749,
+    "seriesId": 85,
+    "date": "2025-02-10T22:36:04Z",
+    "eventType": "episodeFileDeleted",
+    "id": 1760
+  },
+  {
+    "episodeId": 3748,
+    "seriesId": 85,
+    "date": "2025-02-10T22:36:04Z",
+    "eventType": "episodeFileDeleted",
+    "id": 1759
+  },
+  {
+    "episodeId": 3747,
+    "seriesId": 85,
+    "date": "2025-02-10T22:36:04Z",
+    "eventType": "episodeFileDeleted",
+    "id": 1758
+  },
+  {
+    "episodeId": 3746,
+    "seriesId": 85,
+    "date": "2025-02-10T22:36:03Z",
+    "eventType": "episodeFileDeleted",
+    "id": 1757
+  },
+  {
+    "episodeId": 3745,
+    "seriesId": 85,
+    "date": "2025-02-10T22:36:03Z",
+    "eventType": "episodeFileDeleted",
+    "id": 1756
+  },
+  {
+    "episodeId": 3744,
+    "seriesId": 85,
+    "date": "2025-02-10T22:36:02Z",
+    "eventType": "episodeFileDeleted",
+    "id": 1755
+  },
+  {
+    "episodeId": 3743,
+    "seriesId": 85,
+    "date": "2025-02-10T21:44:22Z",
+    "eventType": "episodeFileDeleted",
+    "id": 1754
+  },
+  {
+    "episodeId": 3762,
+    "seriesId": 85,
+    "date": "2025-01-23T16:05:42Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 739,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3761,
+    "seriesId": 85,
+    "date": "2025-01-23T16:05:42Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 738,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3760,
+    "seriesId": 85,
+    "date": "2025-01-23T16:05:42Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 737,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3759,
+    "seriesId": 85,
+    "date": "2025-01-23T16:05:42Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 736,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3758,
+    "seriesId": 85,
+    "date": "2025-01-23T16:05:42Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 735,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3757,
+    "seriesId": 85,
+    "date": "2025-01-23T16:05:41Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 734,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3756,
+    "seriesId": 85,
+    "date": "2025-01-23T16:05:41Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 733,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3755,
+    "seriesId": 85,
+    "date": "2025-01-23T16:05:41Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 732,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3754,
+    "seriesId": 85,
+    "date": "2025-01-23T16:05:41Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 731,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3753,
+    "seriesId": 85,
+    "date": "2025-01-23T16:05:40Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 730,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3752,
+    "seriesId": 85,
+    "date": "2025-01-23T15:32:33Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 729,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3751,
+    "seriesId": 85,
+    "date": "2025-01-23T15:32:33Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 728,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3750,
+    "seriesId": 85,
+    "date": "2025-01-23T15:32:32Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 727,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3749,
+    "seriesId": 85,
+    "date": "2025-01-23T15:32:32Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 726,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3748,
+    "seriesId": 85,
+    "date": "2025-01-23T15:32:32Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 725,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3747,
+    "seriesId": 85,
+    "date": "2025-01-23T15:32:32Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 724,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3746,
+    "seriesId": 85,
+    "date": "2025-01-23T15:32:32Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 723,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3745,
+    "seriesId": 85,
+    "date": "2025-01-23T15:32:31Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 722,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3744,
+    "seriesId": 85,
+    "date": "2025-01-23T15:32:31Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 721,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3743,
+    "seriesId": 85,
+    "date": "2025-01-23T15:32:30Z",
+    "eventType": "downloadFolderImported",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 720,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3762,
+    "seriesId": 85,
+    "date": "2025-01-23T14:29:18Z",
+    "eventType": "grabbed",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 719,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3761,
+    "seriesId": 85,
+    "date": "2025-01-23T14:29:18Z",
+    "eventType": "grabbed",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 718,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3760,
+    "seriesId": 85,
+    "date": "2025-01-23T14:29:18Z",
+    "eventType": "grabbed",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 717,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3759,
+    "seriesId": 85,
+    "date": "2025-01-23T14:29:18Z",
+    "eventType": "grabbed",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 716,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3758,
+    "seriesId": 85,
+    "date": "2025-01-23T14:29:18Z",
+    "eventType": "grabbed",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 715,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3757,
+    "seriesId": 85,
+    "date": "2025-01-23T14:29:18Z",
+    "eventType": "grabbed",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 714,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3756,
+    "seriesId": 85,
+    "date": "2025-01-23T14:29:18Z",
+    "eventType": "grabbed",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 713,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3755,
+    "seriesId": 85,
+    "date": "2025-01-23T14:29:18Z",
+    "eventType": "grabbed",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 712,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3754,
+    "seriesId": 85,
+    "date": "2025-01-23T14:29:18Z",
+    "eventType": "grabbed",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 711,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3753,
+    "seriesId": 85,
+    "date": "2025-01-23T14:29:18Z",
+    "eventType": "grabbed",
+    "downloadId": "AAAAAD29F161E9DD7B2BC43A53D5114760C764AA",
+    "id": 710,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3752,
+    "seriesId": 85,
+    "date": "2025-01-23T14:28:39Z",
+    "eventType": "grabbed",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 709,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3751,
+    "seriesId": 85,
+    "date": "2025-01-23T14:28:39Z",
+    "eventType": "grabbed",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 708,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3750,
+    "seriesId": 85,
+    "date": "2025-01-23T14:28:39Z",
+    "eventType": "grabbed",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 707,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3749,
+    "seriesId": 85,
+    "date": "2025-01-23T14:28:39Z",
+    "eventType": "grabbed",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 706,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3748,
+    "seriesId": 85,
+    "date": "2025-01-23T14:28:39Z",
+    "eventType": "grabbed",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 705,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3747,
+    "seriesId": 85,
+    "date": "2025-01-23T14:28:39Z",
+    "eventType": "grabbed",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 704,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3746,
+    "seriesId": 85,
+    "date": "2025-01-23T14:28:39Z",
+    "eventType": "grabbed",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 703,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3745,
+    "seriesId": 85,
+    "date": "2025-01-23T14:28:39Z",
+    "eventType": "grabbed",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 702,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3744,
+    "seriesId": 85,
+    "date": "2025-01-23T14:28:39Z",
+    "eventType": "grabbed",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 701,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  },
+  {
+    "episodeId": 3743,
+    "seriesId": 85,
+    "date": "2025-01-23T14:28:39Z",
+    "eventType": "grabbed",
+    "downloadId": "BBBBB4F4132C4AC7031F5692F36AC77A2ECBCCBB",
+    "id": 700,
+    "data": {
+      "downloadClient": "rTorrent",
+      "downloadClientName": "rTorrent"
+    }
+  }
+]

@@ -13,7 +13,7 @@ type RtorrentClient struct {
 	xmlrpcClient *xmlrpc.Client
 }
 
-func NewRtorrentClient(config Clients) TorrentClient {
+func NewRtorrentClient(config ClientConfig) TorrentClient {
 	defaultTransport := http.DefaultTransport.(*http.Transport)
 	transport := &http.Transport{
 		Proxy: defaultTransport.Proxy,
@@ -27,7 +27,7 @@ func NewRtorrentClient(config Clients) TorrentClient {
 		TLSHandshakeTimeout:   defaultTransport.TLSHandshakeTimeout,
 		ExpectContinueTimeout: defaultTransport.ExpectContinueTimeout,
 	}
-	xmlrpcClient, err := xmlrpc.NewClient(config.Rtorrent.Host, transport)
+	xmlrpcClient, err := xmlrpc.NewClient(config["host"].(string), transport)
 	if err != nil {
 		log.Error("Coulnd't initialize rtorrent client")
 		return nil

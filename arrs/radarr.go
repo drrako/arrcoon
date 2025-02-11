@@ -37,7 +37,7 @@ func NewRadarr(appDir string, host string, token string, torrentClient clients.T
 	return &Radarr{
 		appDir:        appDir,
 		torrentClient: torrentClient,
-		restClient:    resty.New().SetBaseURL(host).SetHeader("X-Api-Key", token),
+		restClient:    resty.New().SetBaseURL(host).SetHeader(AUTH_HEADER, token),
 		index:         *NewIndex("radarr", appDir),
 	}
 }
@@ -79,11 +79,10 @@ func (r *Radarr) HandleEvent(event string) {
 			log.WithError(err).Error("Failed to convert radarr_movie_id to int")
 			return
 		}
-		var torrentHash string
+		// Never call removeOutdatedTorrents if downloadId is not a valid torrent hash
 		if isValidTorrentHash(downloadId) {
-			torrentHash = downloadId
+			r.removeOutdatedTorrents(movieId, downloadId)
 		}
-		r.removeOutdatedTorrents(movieId, torrentHash)
 	case "MovieDelete":
 		removedMovieId := os.Getenv("radarr_movie_id")
 		movieId, err := strconv.Atoi(removedMovieId)
@@ -198,6 +197,7 @@ func (r *Radarr) buildIndex() {
 	}).Info("Radarr index built")
 }
 
+// Removes all torrent files which are not mapped to the current movie
 func (r *Radarr) removeOutdatedTorrents(movieId int, torrentHash string) {
 	movieHistory := r.getMovieHistory(movieId)
 

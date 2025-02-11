@@ -5,6 +5,5 @@ radarr:
   host: http://localhost:7878
   token: XXXX
 clients:
-  type: rtorrent
   rtorrent:
     host: http://localhost/rtorrent/RPC2

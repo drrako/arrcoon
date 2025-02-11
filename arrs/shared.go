@@ -2,6 +2,8 @@ package arrs
 
 import "regexp"
 
+const AUTH_HEADER = "X-Api-Key"
+
 // function that checks if string a valid torrent hash value
 func isValidTorrentHash(hash string) bool {
 	// SHA-1 hash (40-character hexadecimal)
