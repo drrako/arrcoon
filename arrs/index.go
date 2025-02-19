@@ -52,6 +52,9 @@ func (i *Index) saveIndexFile(name string, indexFile IndexFile) bool {
 		}).Error("Error writing to file")
 		return false
 	}
+	log.WithFields(log.Fields{
+		"File Path": indexFilePath,
+	}).Debug("Index file has been upserted")
 	return true
 }
 
@@ -83,6 +86,9 @@ func (i *Index) removeIndexFile(name string) {
 			"File Path": indexFilePath,
 		}).Error("Error removing index file")
 	}
+	log.WithFields(log.Fields{
+		"File Path": indexFilePath,
+	}).Info("Index file was removed")
 }
 
 func (i *Index) indexPath() string {

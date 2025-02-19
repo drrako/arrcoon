@@ -32,7 +32,6 @@ func TestTransmissionRemove(t *testing.T) {
 	id2 := int64(22)
 	hashString2 := "BBB65110BA16EF7839C27604B41AB083C832D83C"
 	removeHashes := []string{"AAA65110BA16EF7839C27604B41AB083C832D83C", "BBB65110BA16EF7839C27604B41AB083C832D83C"}
-	// Create array of transmissionrpc.Torrent
 	mockTransmissionClient.On("TorrentGetAllForHashes", mock.Anything, removeHashes).Return([]transmissionrpc.Torrent{
 		{ID: &id2, HashString: &hashString2},
 	}, nil)

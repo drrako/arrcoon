@@ -61,7 +61,7 @@ func TestPartiallyRemovedSeason(t *testing.T) {
 			"seriesId":       "85",
 		}).
 		Reply(200).
-		JSON(testutils.LoadJson("history_response_partially_removed_season_episodes_example"))
+		JSON(testutils.LoadJson("history_season_partially_removed"))
 
 	sonarr.removeOutdatedTorrents(85, nil)
 
@@ -89,10 +89,11 @@ func TestEntirelyRemovedSeason(t *testing.T) {
 			"seriesId":       "85",
 		}).
 		Reply(200).
-		JSON(testutils.LoadJson("history_response_removed_season_episodes_example"))
+		JSON(testutils.LoadJson("history_season_removed"))
 
 	os.Setenv("sonarr_series_id", "85")
-	os.Setenv("sonarr_episodefile_id", "3752")
+	os.Setenv("sonarr_episodefile_id", "1512")
+	os.Setenv("sonarr_episodefile_episodeids", "3752")
 
 	sonarr.HandleEvent("EpisodeFileDelete")
 

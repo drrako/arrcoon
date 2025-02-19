@@ -5,6 +5,7 @@ import (
 	"os"
 	"sort"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/go-resty/resty/v2"
@@ -82,17 +83,20 @@ func (s *Sonarr) HandleEvent(event string) {
 	case "EpisodeFileDelete":
 		seriesIdString := os.Getenv("sonarr_series_id")
 		deletedEpisodeIdString := os.Getenv("sonarr_episodefile_id")
+		deletedEpisodeIdsString := os.Getenv("sonarr_episodefile_episodeids")
 		// Log the event
 		log.WithFields(log.Fields{
-			"sonarr_series_id":      seriesIdString,
-			"sonarr_episodefile_id": deletedEpisodeIdString,
+			"sonarr_series_id":              seriesIdString,
+			"sonarr_episodefile_id":         deletedEpisodeIdString,
+			"sonarr_episodefile_episodeids": deletedEpisodeIdsString,
 		}).Debug("Handling EpisodeFileDelete event")
 		seriesId, err := strconv.Atoi(seriesIdString)
 		if err != nil {
 			log.WithError(err).Error("Failed to convert sonarr_series_id to int")
 			return
 		}
-		deletedEpisodeId, err := strconv.Atoi(deletedEpisodeIdString)
+		episodeIdsParts := strings.Split(deletedEpisodeIdsString, ",")
+		deletedEpisodeId, err := strconv.Atoi(strings.TrimSpace(episodeIdsParts[0]))
 		if err != nil {
 			log.WithError(err).Error("Failed to convert sonarr_episodefile_id to int")
 			return
