@@ -11,11 +11,13 @@ Arcoon is a single-binary Go application compiled for various platforms that acc
 Download the [latest](https://github.com/drrako/arrcoon/releases) appropriate architecture binary. Create a directory `arrcoon` inside your *arr config folder and put the binary inside.
 Make sure `arccoon` has execution rights:
 ```bash
+mkdir /path/to/sonarr/config/arrcoon
 cd /path/to/sonarr/config/arrcoon
+curl -L "https://github.com/drrako/arrcoon/releases/download/65b2779/arrcoon-linux-amd64-65b2779.zip" -o arrcoon.zip && unzip arrcoon.zip && rm arrcoon.zip
 chmod +x arrcoon
 ```
 
-Create `config.yml` in the installation dir (`/path/to/sonarr/config/arrcoon`) based on the [sample](https://github.com/drrako/arrcoon/blob/main/config.sample.yml), e.g.:
+Create `config.yml` in the installation dir (`/path/to/sonarr/config/arrcoon`) based on the [example](https://github.com/drrako/arrcoon/blob/main/config.sample.yml), e.g.:
 ```yml
 sonarr:
   host: http://localhost:8989
@@ -50,7 +52,7 @@ Supported clients:
       host: http://user:password@localhost:9091/transmission/rpc
   ```
 
-Define Sonarr/Radarr `arrcoon` connection and click `Test` to validate config:
+Add Sonarr/Radarr `arrcoon` connection and click `Test` to validate config:
 
 <p align="center">
   <img width="300" alt="sonarr1" src="https://github.com/user-attachments/assets/795424ae-363d-44bb-9cbf-8f95b7877d58" />
@@ -58,3 +60,11 @@ Define Sonarr/Radarr `arrcoon` connection and click `Test` to validate config:
 </p>
 
 > :warning: You're required to click `Test` as arrcoon builds internal index during testing
+
+
+### Logs
+
+Logs can be found in the `logs` directory, alongside the `arrcoon` binary:
+```bash
+tail -f /path/to/sonarr/config/arrcoon/logs/arrcoon.log
+```
