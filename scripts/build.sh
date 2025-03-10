@@ -31,7 +31,7 @@ for PLATFORM in "${PLATFORMS[@]}"; do
         echo "✅ Built: $OUTPUT"
     fi
 
-    if [ "$OS" != "darwin" ] || [ "$ARCH" != "amd64" ]; then
+    if [ "$OS" != "darwin" ]; then
         echo "Compressing binary with UPX..."
         upx --best "$OUTPUT"
         if [ $? -ne 0 ]; then
