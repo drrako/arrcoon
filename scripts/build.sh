@@ -1,7 +1,7 @@
 #!/bin/bash
 
 APP_NAME="arrcoon"
-PLATFORMS=("linux/amd64" "linux/arm64" "windows/amd64" "darwin/amd64" "darwin/arm64")
+PLATFORMS=("linux/amd64" "linux/arm64" "linux/arm" "windows/amd64" "darwin/amd64" "darwin/arm64")
 BUILD_DIR="build"
 
 # Get short Git commit SHA
