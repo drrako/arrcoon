@@ -7,14 +7,16 @@ BUILD_DIR="build"
 # Get short Git commit SHA
 GIT_SHA=$(git rev-parse --short HEAD 2>/dev/null || echo "unknown")
 
-cd ..
 rm -rf $BUILD_DIR
 mkdir -p $BUILD_DIR/artifacts
 
 for PLATFORM in "${PLATFORMS[@]}"; do
     OS=${PLATFORM%/*}
     ARCH=${PLATFORM#*/}
-    OUTPUT="$BUILD_DIR/$APP_NAME-${OS}-${ARCH}"
+    PLATFORM_DIR="$BUILD_DIR/$APP_NAME-$OS-$ARCH"
+
+    mkdir -p "$PLATFORM_DIR"
+    OUTPUT="$PLATFORM_DIR/$APP_NAME"
 
     # Add .exe extension for Windows builds
     if [ "$OS" == "windows" ]; then
