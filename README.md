@@ -8,18 +8,18 @@ Arcoon is a single-binary Go application compiled for various platforms that acc
 
 ### Installation
 
-Download the [latest](https://github.com/drrako/arrcoon/releases) appropriate architecture binary. Create a directory `arrcoon` inside your *arr config folder and put there the binary.
+Download the [latest](https://github.com/drrako/arrcoon/releases) appropriate architecture binary. Create a directory `arrcoon` inside your *arr config folder and put the binary inside.
 Make sure `arccoon` has execution rights:
 ```bash
 cd /path/to/sonarr/config/arrcoon
 chmod +x arrcoon
 ```
 
-Add `arrcoon` to Sonarr/Radarr:
+Add `arrcoon` to Sonarr/Radarr connections:
 
 <p align="center">
   <img width="300" alt="sonarr1" src="https://github.com/user-attachments/assets/795424ae-363d-44bb-9cbf-8f95b7877d58" />
   <img width="243" alt="sonarr2" src="https://github.com/user-attachments/assets/883724d2-6b2e-4a27-85ae-3f95cc65443a" />
 </p>
 
-> :warning: You're required to click `Tests` as it builds internal index if successful.
+> :warning: You're required to click `Test` as arrcoon builds internal index during testing.
