@@ -6,6 +6,11 @@
 
 Arrcoon is a single-binary Go application that accompanies Sonarr or Radarr installation and tries its best to automatically remove associated torrents from the torrent client immediately when the media is deleted from the *arr library. It builds and maintains own series (movies) index based *arr on events and history API.
 
+### Key features
+
+- Instantly removes torrent downloads from the client when the corresponding show/movie is removed from Sonarr/Radarr library
+- Removes torrent downloads that are no longer mapped in the Sonarr/Radarr library (including individual episodes/season packs)
+
 ### Installation
 
 Download the [latest](https://github.com/drrako/arrcoon/releases) binary for your architecture. Create a directory `arrcoon` inside *arr config folder and put the binary inside.
