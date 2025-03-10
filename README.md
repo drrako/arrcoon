@@ -14,7 +14,7 @@ Arrcoon is a single-binary Go application that accompanies Sonarr or Radarr inst
 ### Installation
 
 Download the [latest](https://github.com/drrako/arrcoon/releases) binary for your architecture. Create a directory `arrcoon` inside *arr config folder and put the binary inside.
-Make sure `arccoon` has execution rights:
+Make sure `arccoon` has execute permissions:
 ```bash
 mkdir /path/to/sonarr/config/arrcoon
 cd /path/to/sonarr/config/arrcoon
