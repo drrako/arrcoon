@@ -8,7 +8,7 @@ BUILD_DIR="build"
 GIT_SHA=$(git rev-parse --short HEAD 2>/dev/null || echo "unknown")
 
 cd ..
-# mkdir -p BUILD_DIR
+rm -rf $BUILD_DIR
 mkdir -p $BUILD_DIR/artifacts
 
 for PLATFORM in "${PLATFORMS[@]}"; do
@@ -33,7 +33,7 @@ for PLATFORM in "${PLATFORMS[@]}"; do
 
     if [ "$OS" != "darwin" ] || [ "$ARCH" != "amd64" ]; then
         echo "Compressing binary with UPX..."
-        upx --best --lzma "$OUTPUT"
+        upx --best "$OUTPUT"
         if [ $? -ne 0 ]; then
             echo "❌ UPX compression failed for $OUTPUT"
         else
