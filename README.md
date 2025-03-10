@@ -8,7 +8,7 @@ Arcoon is a single-binary Go application compiled for various platforms that acc
 
 ### Installation
 
-Download the [latest](https://github.com/drrako/arrcoon/releases) appropriate architecture binary. Create a directory `arrcoon` inside your *arr config folder and put the binary inside.
+Download the [latest](https://github.com/drrako/arrcoon/releases) binary for your architecture. Create a directory `arrcoon` inside *arr config folder and put the binary inside.
 Make sure `arccoon` has execution rights:
 ```bash
 mkdir /path/to/sonarr/config/arrcoon
