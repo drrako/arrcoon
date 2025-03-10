@@ -1,0 +1,8 @@
+.http_snippets/
+.vscode/
+.index/
+logs/
+build/
+
+config.yml
+arrcoon
