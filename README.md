@@ -4,7 +4,7 @@
   <img width="200" alt="image" src="https://github.com/user-attachments/assets/67b99312-e0c7-468b-8afa-f1b6737f6bbd" />
 </p>
 
-Arcoon is a single-binary Go application that accompanies Sonarr or Radarr installation and tries its best to automatically remove associated torrents from the torrent client immediately when the media is deleted from the *arr library. It builds and maintains own series (movies) index based *arr on events and history API.
+Arrcoon is a single-binary Go application that accompanies Sonarr or Radarr installation and tries its best to automatically remove associated torrents from the torrent client immediately when the media is deleted from the *arr library. It builds and maintains own series (movies) index based *arr on events and history API.
 
 ### Installation
 
