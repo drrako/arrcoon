@@ -8,8 +8,8 @@ Arrcoon is a single-binary Go application that accompanies Sonarr or Radarr inst
 
 ### Key features
 
-- Instantly removes torrent downloads from the client when the corresponding show/movie is removed from Sonarr/Radarr library
-- Removes torrent downloads that are no longer mapped in the Sonarr/Radarr library (including individual episodes/season packs)
+- Instantly removes torrent downloads from the client when the corresponding show/movie is removed from *arrs library
+- Removes torrent downloads that are no longer mapped in the *arrs library (including individual episodes/season packs)
 
 ### Installation
 
@@ -27,13 +27,15 @@ Create `config.yml` in the installation dir (`/path/to/sonarr/config/arrcoon`) b
 sonarr:
   host: http://localhost:8989
   token: XXXX
-radarr:
-  host: http://localhost:7878
-  token: XXXX
+# radarr:
+#   host: http://localhost:7878
+#   token: XXXX
 clients:
   rtorrent:
     host: http://localhost/rtorrent/RPC2
 ```
+
+> ⚠️ arrcoon supports only single torrent client per *arr installation
 
 Supported clients:
 - rTorrent (basic auth is not supported)
