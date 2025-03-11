@@ -27,9 +27,9 @@ Create `config.yml` in the installation dir (`/path/to/sonarr/config/arrcoon`) b
 sonarr:
   host: http://localhost:8989
   token: XXXX
-radarr:
-  host: http://localhost:7878
-  token: XXXX
+# radarr:
+#   host: http://localhost:7878
+#   token: XXXX
 clients:
   rtorrent:
     host: http://localhost/rtorrent/RPC2
