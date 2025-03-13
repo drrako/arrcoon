@@ -58,6 +58,19 @@ Supported clients:
     transmission:
       host: http://user:password@localhost:9091/transmission/rpc
   ```
+- qbittorrent:
+  ```yml
+  ...
+  clients:
+    qbittorrent:
+      host: http://localhost:8080
+  
+  ... ---- Or with auth ---- ...
+  
+  clients:
+    qbittorrent:
+      host: http://LOGIN:PASS@localhost:8080
+  ```
 
 Add Sonarr/Radarr `arrcoon` connection and click `Test` to validate config:
 

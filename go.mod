@@ -5,10 +5,14 @@ go 1.23.5
 require github.com/stretchr/testify v1.10.0
 
 require (
+	github.com/Masterminds/semver v1.5.0 // indirect
+	github.com/autobrr/go-qbittorrent v1.11.0 // indirect
+	github.com/avast/retry-go v3.0.0+incompatible // indirect
 	github.com/h2non/parth v0.0.0-20190131123155-b4df798d6542 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hekmon/cunits/v2 v2.1.0 // indirect
 	github.com/hekmon/transmissionrpc/v3 v3.0.0 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
 )
 

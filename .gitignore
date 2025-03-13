@@ -3,6 +3,8 @@
 .index/
 logs/
 build/
+temp/
+docker/
 
 config.yml
 arrcoon

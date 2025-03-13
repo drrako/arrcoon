@@ -89,7 +89,19 @@ func main() {
 	// Get Sonarr event type
 	sonarrEventType := os.Getenv("sonarr_eventtype")
 	radarrEventType := os.Getenv("radarr_eventtype")
+	arrcoonEventType := os.Getenv("arrcoon_eventtype")
 
+	if arrcoonEventType != "" {
+		switch arrcoonEventType {
+		case "test_torrent_client":
+			torrentClient.Test()
+		default:
+			log.WithFields(log.Fields{
+				"EventType": arrcoonEventType,
+			}).Info("Unknown arrcoon event type")
+		}
+		return
+	}
 	if sonarrEventType == "Test" || radarrEventType == "Test" {
 		log.WithFields(log.Fields{
 			"Sonarr URL":     config.Sonarr.Host,
