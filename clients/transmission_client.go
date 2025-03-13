@@ -37,11 +37,11 @@ func (trpcw *TransmissionRPC) TorrentRemove(ctx context.Context, payload transmi
 func NewTransmissionClient(config ClientConfig) TorrentClient {
 	endpoint, err := url.Parse(config["host"].(string))
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	tbt, err := transmissionrpc.New(endpoint, nil)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	return &TransmissionClient{transmissionClient: &TransmissionRPC{tbt}}
 }
