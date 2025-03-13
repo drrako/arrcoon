@@ -12,7 +12,7 @@ type QBittorentClient struct {
 	qbittorrentClient *qbittorrent.Client
 }
 
-func NewQbittorentClient(config ClientConfig) TorrentClient {
+func NewQbittorrentClient(config ClientConfig) TorrentClient {
 	endpoint, err := url.Parse(config["host"].(string))
 	if err != nil {
 		log.Fatal(err)

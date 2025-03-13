@@ -10,5 +10,5 @@ type TorrentClient interface {
 var Instances = map[string]func(clientConfig ClientConfig) TorrentClient{
 	"rtorrent":     NewRtorrentClient,
 	"transmission": NewTransmissionClient,
-	"qbittorrent":  NewQbittorentClient,
+	"qbittorrent":  NewQbittorrentClient,
 }
