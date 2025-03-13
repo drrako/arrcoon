@@ -18,7 +18,7 @@ Make sure `arccoon` has execute permissions:
 ```bash
 mkdir /path/to/sonarr/config/arrcoon
 cd /path/to/sonarr/config/arrcoon
-curl -L "https://github.com/drrako/arrcoon/releases/download/65b2779/arrcoon-linux-amd64-65b2779.zip" -o arrcoon.zip && unzip arrcoon.zip && rm arrcoon.zip
+curl -L "https://github.com/drrako/arrcoon/releases/download/b0a268b/arrcoon-linux-amd64-b0a268b.zip" -o arrcoon.zip && unzip arrcoon.zip && rm arrcoon.zip
 chmod +x arrcoon
 ```
 
