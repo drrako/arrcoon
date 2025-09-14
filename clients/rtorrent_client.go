@@ -3,6 +3,7 @@ package clients
 import (
 	"net"
 	"net/http"
+	"slices"
 	"time"
 
 	"github.com/kolo/xmlrpc"
@@ -38,16 +39,14 @@ func NewRtorrentClient(config ClientConfig) TorrentClient {
 func (rc RtorrentClient) Test() bool {
 	log.Info("Testing Rtorrent accessibility")
 	var listedMethods []string
-	err := rc.xmlrpcClient.Call("system.listMethods", []interface{}{}, &listedMethods)
+	err := rc.xmlrpcClient.Call("system.listMethods", []any{}, &listedMethods)
 	if err != nil {
 		log.WithError(err).Error("Couldn't connect to rTorrent")
 		return false
 	}
-	for _, m := range listedMethods {
-		if m == "d.erase" {
-			log.Info("Succesfully connected to rTorrent client")
-			return true
-		}
+	if slices.Contains(listedMethods, "d.erase") {
+		log.Info("Succesfully connected to rTorrent client")
+		return true
 	}
 	log.Error("Unsupported rTorrent instance")
 	return false
@@ -61,63 +60,71 @@ func (rc RtorrentClient) RemoveTorrents(hashes []string) {
 		"Hashes": hashes,
 	}).Info("Requesting torrent files removal")
 	for _, hash := range hashes {
-		var response interface{}
-		deleteParams := []map[string]interface{}{
-			{
-				"methodName": "d.custom5.set",
-				"params":     []interface{}{hash, "1"},
-			},
-			{
-				"methodName": "d.delete_tied",
-				"params":     []interface{}{hash},
-			},
-			{
-				"methodName": "d.erase",
-				"params":     []interface{}{hash},
-			},
-		}
-		err := rc.xmlrpcClient.Call("system.multicall", deleteParams, &response)
-
-		if err != nil {
-			log.WithError(err).Error("Couldn't run erase call")
-		}
-
-		responseSlice, ok := response.([]interface{})
-		if !ok {
-			log.WithFields(log.Fields{
-				"Error responses": response,
-				"Hash":            hash,
-			}).Error("Unknown response type")
-			continue
-		}
-
-		var successResponses []interface{}
-		var errorResponses []interface{}
-
-		for _, responseMap := range responseSlice {
-			if responseMapSlice, ok := responseMap.([]interface{}); ok {
-				successResponse, ok := responseMapSlice[0].(string)
-				if ok {
-					successResponses = append(successResponses, successResponse)
-				}
-			} else if responseMapMap, ok := responseMap.(map[string]interface{}); ok {
-				errorResponses = append(errorResponses, responseMapMap)
+		for attempt := 1; attempt <= 3; attempt++ {
+			var response any
+			deleteParams := []map[string]any{
+				{
+					"methodName": "d.custom5.set",
+					"params":     []any{hash, "1"},
+				},
+				{
+					"methodName": "d.delete_tied",
+					"params":     []any{hash},
+				},
+				{
+					"methodName": "d.erase",
+					"params":     []any{hash},
+				},
 			}
-		}
+			err := rc.xmlrpcClient.Call("system.multicall", deleteParams, &response)
 
-		if len(errorResponses) > 0 {
-			// Debug level because it is expected that the same hash code could be passed to rTorrent multiple times
-			log.WithFields(log.Fields{
-				"Error responses": errorResponses,
-				"Hash":            hash,
-			}).Debug("Couldn't remove torrents")
-			continue
-		}
+			if err != nil {
+				log.WithError(err).Error("Couldn't run erase call")
+				time.Sleep(time.Second)
+				continue
+			}
 
-		if len(successResponses) > 0 {
-			log.WithFields(log.Fields{
-				"Hash": hash,
-			}).Info("Torrent has been removed")
+			responseSlice, ok := response.([]any)
+			if !ok {
+				log.WithFields(log.Fields{
+					"Error responses": response,
+					"Hash":            hash,
+				}).Error("Unknown response type")
+				time.Sleep(time.Second)
+				continue
+			}
+
+			var successResponses []interface{}
+			var errorResponses []interface{}
+
+			for _, responseMap := range responseSlice {
+				if responseMapSlice, ok := responseMap.([]interface{}); ok {
+					successResponse, ok := responseMapSlice[0].(string)
+					if ok {
+						successResponses = append(successResponses, successResponse)
+					}
+				} else if responseMapMap, ok := responseMap.(map[string]interface{}); ok {
+					errorResponses = append(errorResponses, responseMapMap)
+				}
+			}
+
+			if len(errorResponses) > 0 {
+				log.WithFields(log.Fields{
+					"Attempt":         attempt,
+					"Error responses": errorResponses,
+					"Hash":            hash,
+				}).Debug("Couldn't remove torrents")
+				time.Sleep(time.Second)
+				continue
+			}
+
+			if len(successResponses) > 0 {
+				log.WithFields(log.Fields{
+					"Hash":    hash,
+					"Attempt": attempt,
+				}).Info("Torrent has been removed")
+				break
+			}
 		}
 	}
 }
