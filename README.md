@@ -39,9 +39,9 @@ clients:
 
 | Client | Configuration Example | Notes |
 | :--- | :--- | :--- |
-| **rTorrent** | <pre lang="yaml">clients:<br>  rtorrent:<br>    host: http://localhost/rtorrent/RPC2</pre> | Basic auth is not supported. |
-| **transmission** | <pre lang="yaml"># Without auth<br>clients:<br>  transmission:<br>    host: http://localhost:9091/transmission/rpc</pre><pre lang="yaml"># With auth<br>clients:<br>  transmission:<br>    host: http://user:password@localhost:9091/transmission/rpc</pre> | |
-| **qbittorrent** | <pre lang="yaml"># Without auth<br>clients:<br>  qbittorrent:<br>    host: http://localhost:8080</pre><pre lang="yaml"># With auth<br>clients:<br>  qbittorrent:<br>    host: http://LOGIN:PASS@localhost:8080</pre> | |
+| **rTorrent** | `clients:`<br>`  rtorrent:`<br>`    host: http://localhost/rtorrent/RPC2` | Basic auth is not supported. |
+| **transmission** | `# Without auth<br>clients:`<br>`  transmission:`<br>`    host: http://localhost:9091/transmission/rpc`<br>`# With auth`<br>`clients:`<br>`  transmission:`<br>`    host: http://user:password@localhost:9091/transmission/rpc` | |
+| **qbittorrent** | `# Without auth`<br>`clients:`<br>`  qbittorrent:`<br>`    host: http://localhost:8080`<br>`# With auth`<br>`clients:`<br>`  qbittorrent:`<br>`    host: http://LOGIN:PASS@localhost:8080` | |
 
 
 Add Sonarr/Radarr `arrcoon` connection and click `Test` to validate config:
