@@ -37,40 +37,12 @@ clients:
 
 > ⚠️ arrcoon supports only single torrent client per *arr installation
 
-Supported clients:
-- rTorrent (basic auth is not supported)
-  ```yml
-  ...
-  clients:
-    rtorrent:
-      host: http://localhost/rtorrent/RPC2
-  ```
-- transmission:
-  ```yml
-  ...
-  clients:
-    transmission:
-      host: http://localhost:9091/transmission/rpc
-  
-  ... ---- Or with auth ---- ...
-  
-  clients:
-    transmission:
-      host: http://user:password@localhost:9091/transmission/rpc
-  ```
-- qbittorrent:
-  ```yml
-  ...
-  clients:
-    qbittorrent:
-      host: http://localhost:8080
-  
-  ... ---- Or with auth ---- ...
-  
-  clients:
-    qbittorrent:
-      host: http://LOGIN:PASS@localhost:8080
-  ```
+| Client | Configuration Example | Notes |
+| :--- | :--- | :--- |
+| **rTorrent** | <pre lang="yaml">clients:<br>  rtorrent:<br>    host: http://localhost/rtorrent/RPC2</pre> | Basic auth is not supported. |
+| **transmission** | <pre lang="yaml"># Without auth<br>clients:<br>  transmission:<br>    host: http://localhost:9091/transmission/rpc</pre><pre lang="yaml"># With auth<br>clients:<br>  transmission:<br>    host: http://user:password@localhost:9091/transmission/rpc</pre> | |
+| **qbittorrent** | <pre lang="yaml"># Without auth<br>clients:<br>  qbittorrent:<br>    host: http://localhost:8080</pre><pre lang="yaml"># With auth<br>clients:<br>  qbittorrent:<br>    host: http://LOGIN:PASS@localhost:8080</pre> | |
+
 
 Add Sonarr/Radarr `arrcoon` connection and click `Test` to validate config:
 
