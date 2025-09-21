@@ -40,7 +40,7 @@ clients:
 | Client | Configuration Example | Notes |
 | :--- | :--- | :--- |
 | **rTorrent** | `clients:`<br>`  rtorrent:`<br>`    host: http://localhost/rtorrent/RPC2` | Basic auth is not supported. |
-| **transmission** | `# Without auth<br>clients:`<br>`  transmission:`<br>`    host: http://localhost:9091/transmission/rpc`<br>`# With auth`<br>`clients:`<br>`  transmission:`<br>`    host: http://user:password@localhost:9091/transmission/rpc` | |
+| **transmission** | `# Without auth`<br>`clients:`<br>`  transmission:`<br>`    host: http://localhost:9091/transmission/rpc`<br>`# With auth`<br>`clients:`<br>`  transmission:`<br>`    host: http://user:password@localhost:9091/transmission/rpc` | |
 | **qbittorrent** | `# Without auth`<br>`clients:`<br>`  qbittorrent:`<br>`    host: http://localhost:8080`<br>`# With auth`<br>`clients:`<br>`  qbittorrent:`<br>`    host: http://LOGIN:PASS@localhost:8080` | |
 
 
