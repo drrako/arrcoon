@@ -225,7 +225,9 @@ func (s *Sonarr) removeOutdatedTorrents(seriesId int, removedEpisodeId *int) {
 
 	var oudatedHashValues []string
 	for key := range uniqueOutdatedValuesMap {
-		oudatedHashValues = append(oudatedHashValues, key)
+		if isValidTorrentHash(key) {
+			oudatedHashValues = append(oudatedHashValues, key)
+		}
 	}
 
 	log.WithFields(log.Fields{
