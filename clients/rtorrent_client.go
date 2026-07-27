@@ -10,8 +10,12 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+type xmlrpcCaller interface {
+	Call(method string, args any, reply any) error
+}
+
 type RtorrentClient struct {
-	xmlrpcClient *xmlrpc.Client
+	xmlrpcClient xmlrpcCaller
 }
 
 func NewRtorrentClient(config ClientConfig) TorrentClient {
@@ -60,6 +64,9 @@ func (rc RtorrentClient) RemoveTorrents(hashes []string) {
 		"Hashes": hashes,
 	}).Info("Requesting torrent files removal")
 	for _, hash := range hashes {
+		if len(hash) == 0 {
+			continue
+		}
 		for attempt := 1; attempt <= 3; attempt++ {
 			var response any
 			deleteParams := []map[string]any{
