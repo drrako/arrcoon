@@ -12,7 +12,7 @@ jobs:
           go-version-file: go.mod
       - run: go test -json ./... > test-results.json
       - name: Report test results
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v3
         if: success() || failure()
         with:
           name: Go Tests
