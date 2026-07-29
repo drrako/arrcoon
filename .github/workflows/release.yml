@@ -1,0 +1,66 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        goos: [darwin, linux, windows]
+        goarch: [amd64, arm64]
+        exclude:
+          - goos: windows
+            goarch: arm64
+        include:
+          - goos: linux
+            goarch: arm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Install UPX
+        run: sudo apt-get update && sudo apt-get install -y upx
+      - name: Build
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: |
+          BINARY="arrcoon"
+          [ "${{ matrix.goos }}" = "windows" ] && BINARY="$BINARY.exe"
+          go build -ldflags="-s -w" -o "$BINARY" .
+      - name: Compress with UPX
+        if: matrix.goos != 'darwin'
+        run: |
+          BINARY="arrcoon"
+          [ "${{ matrix.goos }}" = "windows" ] && BINARY="$BINARY.exe"
+          upx --best "$BINARY"
+      - name: Package
+        run: |
+          BINARY="arrcoon"
+          [ "${{ matrix.goos }}" = "windows" ] && BINARY="$BINARY.exe"
+          TAG="${GITHUB_REF_NAME}"
+          zip -j "arrcoon-${{ matrix.goos }}-${{ matrix.goarch }}-${TAG}.zip" "$BINARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arrcoon-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: arrcoon-*.zip
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: arrcoon-*
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: arrcoon-*.zip
+          generate_release_notes: true
