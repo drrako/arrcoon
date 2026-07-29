@@ -17,7 +17,7 @@ jobs:
         with:
           name: Go Tests
           path: test-results.json
-          reporter: go-test
+          reporter: golang-json
       - uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
