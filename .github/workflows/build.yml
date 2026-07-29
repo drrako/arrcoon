@@ -1,0 +1,39 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        goos: [darwin, linux, windows]
+        goarch: [amd64, arm64]
+        exclude:
+          - goos: windows
+            goarch: arm64
+        include:
+          - goos: linux
+            goarch: arm
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Build
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: |
+          OUTPUT="arrcoon-${{ matrix.goos }}-${{ matrix.goarch }}"
+          if [ "${{ matrix.goos }}" = "windows" ]; then
+            OUTPUT="$OUTPUT.exe"
+          fi
+          go build -ldflags="-s -w" -o "$OUTPUT" .
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arrcoon-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: arrcoon-${{ matrix.goos }}-${{ matrix.goarch }}*
