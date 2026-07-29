@@ -1,0 +1,60 @@
+name: Build
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - run: go test -json ./... > test-results.json
+      - name: Report test results
+        uses: dorny/test-reporter@v3
+        if: success() || failure()
+        with:
+          name: Go Tests
+          path: test-results.json
+          reporter: golang-json
+      - uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: test-results
+          path: test-results.json
+
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        goos: [darwin, linux, windows]
+        goarch: [amd64, arm64]
+        exclude:
+          - goos: windows
+            goarch: arm64
+        include:
+          - goos: linux
+            goarch: arm
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Build
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: |
+          OUTPUT="arrcoon-${{ matrix.goos }}-${{ matrix.goarch }}"
+          if [ "${{ matrix.goos }}" = "windows" ]; then
+            OUTPUT="$OUTPUT.exe"
+          fi
+          go build -ldflags="-s -w" -o "$OUTPUT" .
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arrcoon-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: arrcoon-${{ matrix.goos }}-${{ matrix.goarch }}*
